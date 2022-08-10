@@ -1,0 +1,24 @@
+# @format
+
+version: "3"
+services:
+    creuse.static:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        container_name: creuse.static
+        restart: unless-stopped
+        volumes:
+            - ./assets/audio:/usr/share/nginx/html/audio
+            - ./assets/css:/usr/share/nginx/html/css
+            - ./assets/fonts:/usr/share/nginx/html/fonts
+            - ./assets/images:/usr/share/nginx/html/images
+            - ./assets/js:/usr/share/nginx/html/js
+        networks:
+            - proxy-bridge
+
+#Docker Networks
+networks:
+    proxy-bridge:
+        external: true
+        name: proxy-bridge
